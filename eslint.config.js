@@ -27,6 +27,11 @@ export default defineConfig([
           singleQuote: false,
           printWidth: 130,
           tabWidth: 2,
+          semi: ["error", "always"], // или 'never' если не хотите точки с запятой
+          "no-unused-vars": "warn", // предупреждения вместо ошибок
+          // отключить проверку пробелов
+          "no-multi-spaces": "off",
+          "no-trailing-spaces": "off",
         },
       ],
     },
