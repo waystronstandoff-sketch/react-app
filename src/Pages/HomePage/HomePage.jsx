@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { QuestionCard } from "../../../components/QuestionCard";
 import { API_URL } from "../../constans";
 import cls from "./HomePage.module.css";
+import { QuestionCardList } from "../../../components/QuestionCardList";
 
 const cards = [];
 
@@ -13,12 +14,9 @@ export const HomePage = () => {
       const response = await fetch(`${API_URL}/react`);
       const questions = await response.json();
 
-      setQuestions(questions)
-
-    } catch (error) {
-      
-    }
-  }
+      setQuestions(questions);
+    } catch (error) {}
+  };
 
   useEffect(() => {
     getQuestions();
@@ -26,11 +24,7 @@ export const HomePage = () => {
 
   return (
     <>
-      {questions.map((card, index) => {
-        return (
-            <QuestionCard card={card} key={index} />
-        )
-      })}
+      <QuestionCardList cards={questions}/>
     </>
   );
 };
