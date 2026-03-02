@@ -3,8 +3,8 @@ import { API_URL } from "../../constans";
 import cls from "./HomePage.module.css";
 import { QuestionCardList } from "../../../components/QuestionCardList";
 import { Loader } from "../../../components/Loader";
-import { delayFn } from "../../helpers/delayFn";
 import { useFetch } from "../../hooks/useFetch";
+import { SearchInput } from "../../../components/SearchInput/SearchInput";
 
 export const HomePage = () => {
   const [questions, setQuestions] = useState([]);
@@ -30,8 +30,10 @@ export const HomePage = () => {
 
   return (
     <>
-      <input type="text" value={searchValue} onChange={searchValueHandler}/>
-
+      <div className={cls.controlsContainer}>
+        <SearchInput value={searchValue} onChange={searchValueHandler}/>
+      </div>
+      
       {isLoading && <Loader />}
       {error && <p>{error}</p>}
       <QuestionCardList cards={questions}/>
