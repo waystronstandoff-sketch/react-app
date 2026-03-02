@@ -20,7 +20,7 @@ export const HomePage = () => {
   
 
   useEffect(() => {
-    getQuestions("react1");
+    getQuestions("react");
   }, []);
 
   return (
