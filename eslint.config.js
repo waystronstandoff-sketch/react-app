@@ -4,6 +4,7 @@ import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
 import { defineConfig, globalIgnores } from "eslint/config";
 import prettier from "eslint-plugin-prettier";
+import react from "react";
 
 export default defineConfig([
   globalIgnores(["dist"]),
@@ -20,20 +21,28 @@ export default defineConfig([
       },
     },
     rules: {
-      "no-unused-vars": ["error", { varsIgnorePattern: "^[A-Z_]" }],
+      ...js.configs.recommended.rules,
+      ...react.configs.recommended.rules,
+      ...react.configs["jsx-runtime"].rules,
+      ...reactHooks.configs.recommended.rules,
+
+      "react/jsx-no-target-blank": "off",
+      "react/prop-types": "warn",
+      "react/display-name": "off",
+
+      "react-refresh/only-export-components": [
+        "warn",
+        { allowConstantExport: true }
+      ],
+
       "prettier/prettier": [
         "error",
         {
           singleQuote: false,
           printWidth: 130,
-          tabWidth: 2,
-          semi: ["error", "always"], // или 'never' если не хотите точки с запятой
-          "no-unused-vars": "warn", // предупреждения вместо ошибок
-          // отключить проверку пробелов
-          "no-multi-spaces": "off",
-          "no-trailing-spaces": "off",
-        },
-      ],
+          tabWidth: 2
+        }
+      ]
     },
     plugins: {
       prettier,
