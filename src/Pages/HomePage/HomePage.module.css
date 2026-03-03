@@ -9,4 +9,20 @@
     margin: 0 auto;
 }
 
+.select {
+    padding: 5px;
+    border-radius: 10px;
+    height: 40px;
+    border: none;
+    outline: none;
+    background-color: var(--card-bg-color);
+    color: var(--text-color);
+    flex-grow: 1;
+}
+
+@media (max-width: 576px) {
+    .controlsContainer {
+        flex-wrap: wrap-reverse;
+    }
+}
 
