@@ -20,6 +20,23 @@
     flex-grow: 1;
 }
 
+.paginationContainer {
+    width: fit-content;
+    max-width: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    padding: 10px 10px 25px 10px;
+    gap: 10px;
+}
+
+p {
+    text-align: center;
+    font-weight: 500;
+    font-size: 20px;
+}
+
 @media (max-width: 576px) {
     .controlsContainer {
         flex-wrap: wrap-reverse;
