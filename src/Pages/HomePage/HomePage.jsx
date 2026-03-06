@@ -1,20 +1,20 @@
-import { useEffect, useMemo, useState, useRef } from "react";
-import { API_URL } from "../../constans";
-import cls from "./HomePage.module.css";
-import { QuestionCardList } from "../../../components/QuestionCardList";
-import { Loader } from "../../../components/Loader";
-import { useFetch } from "../../hooks/useFetch";
-import { SearchInput } from "../../../components/SearchInput/SearchInput";
-import { Button } from "../../../components/Button";
+import { useEffect, useMemo, useState, useRef } from 'react';
+import { API_URL } from '../../constans';
+import cls from './HomePage.module.css';
+import { QuestionCardList } from '../../../components/QuestionCardList';
+import { Loader } from '../../../components/Loader';
+import { useFetch } from '../../hooks/useFetch';
+import { SearchInput } from '../../../components/SearchInput/SearchInput';
+import { Button } from '../../../components/Button';
 
 const DEFAULT_PER_PAGE = 10;
 
 export const HomePage = () => {
   const [searchParams, setSearchParams] = useState(`_page=1&_per_page=${DEFAULT_PER_PAGE}`);
   const [questions, setQuestions] = useState({});
-  const [searchValue, setSearchValue] = useState("");
-  const [sortSelect, setSortSelect] = useState("");
-  const [countSelect, setCountSelect] = useState("");
+  const [searchValue, setSearchValue] = useState('');
+  const [sortSelect, setSortSelect] = useState('');
+  const [countSelect, setCountSelect] = useState('');
 
   const controlsContainerRef = useRef();
 
@@ -26,14 +26,14 @@ export const HomePage = () => {
 
     setQuestions(questions);
     return questions;
-  })
+  });
 
   const cards = useMemo(() => {
     if (questions?.data) {
       if (searchValue.trim()) {
         return questions.data.filter((d) => d.question.toLowerCase().includes(searchValue.trim().toLowerCase()));
       } else {
-        return questions.data
+        return questions.data;
       }
     }
     return [];
@@ -41,8 +41,8 @@ export const HomePage = () => {
 
   const pagination = useMemo(() => {
     const pageCount = questions?.pages || 0;
-    return Array(pageCount).fill(0).map((_, i) => i + 1)
-  }, [questions])
+    return Array(pageCount).fill(0).map((_, i) => i + 1);
+  }, [questions]);
 
   useEffect(() => {
     getQuestions(`react?${searchParams}`);
@@ -54,20 +54,20 @@ export const HomePage = () => {
 
   const onSortSelectChangeHandler = (e) => {
     setSortSelect(e.target.value);
-    setSearchParams(`_page=1&_per_page=${countSelect}&${e.target.value}`)
+    setSearchParams(`_page=1&_per_page=${countSelect}&${e.target.value}`);
   };
 
   const paginationHandler = (e) => {
     if (e.target.tagName === 'BUTTON') {
       setSearchParams(`_page=${e.target.textContent}&_per_page=${countSelect}&${sortSelect}`);
-      controlsContainerRef.current.scrollIntoView({ behavior: "smooth" });
+      controlsContainerRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
   const onChangeCountSelectHandler = (e) => {
     setCountSelect(e.target.value);
-    setSearchParams(`_page=1&_per_page=${e.target.value}&${sortSelect}`)
-  }
+    setSearchParams(`_page=1&_per_page=${e.target.value}&${sortSelect}`);
+  };
 
   return (
     <>
@@ -79,10 +79,10 @@ export const HomePage = () => {
 
           <hr />
 
-          <option value={"_sort=level"}>Level ASC</option>
-          <option value={"_sort=-level"}>Level DESC</option>
-          <option value={"_sort=completed"}>Completed ASC</option>
-          <option value={"_sort=-completed"}>Completed DESC</option>
+          <option value={'_sort=level'}>Level ASC</option>
+          <option value={'_sort=-level'}>Level DESC</option>
+          <option value={'_sort=completed'}>Completed ASC</option>
+          <option value={'_sort=-completed'}>Completed DESC</option>
         </select>
 
         <select value={countSelect} className={cls.select} onChange={onChangeCountSelectHandler}>
@@ -90,11 +90,11 @@ export const HomePage = () => {
 
           <hr />
 
-          <option value={"20"}>20</option>
-          <option value={"30"}>30</option>
-          <option value={"40"}>40</option>
-          <option value={"50"}>50</option>
-          <option value={"100"}>100</option>
+          <option value={'20'}>20</option>
+          <option value={'30'}>30</option>
+          <option value={'40'}>40</option>
+          <option value={'50'}>50</option>
+          <option value={'100'}>100</option>
         </select>
       </div>
 
@@ -104,12 +104,12 @@ export const HomePage = () => {
       <QuestionCardList cards={cards} />
 
       {cards.length === 0 ? (
-        <p>No cards...</p>
+        <p className={cls.noCards}>No cards...</p>
       ) : (
         pagination.length > 1 && (
           <div className={cls.paginationContainer} onClick={paginationHandler}>
             {pagination.map((value) => {
-              return <Button key={value} isActive={value === getActivePageNumber()}>{value}</Button>
+              return <Button key={value} isActive={value === getActivePageNumber()}>{value}</Button>;
             })}
           </div>
         )
