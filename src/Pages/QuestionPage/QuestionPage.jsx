@@ -2,6 +2,7 @@ import cls from './QuestionPage.module.css';
 import { useNavigate } from 'react-router-dom';
 import { Badge } from '../../../components/Badge';
 import { Button } from '../../../components/Button';
+import { useId, useState } from 'react';
 
 const card = {  
   id: '1',
@@ -18,7 +19,9 @@ const card = {
 };
 
 export const QuestionPage = () => {
+  const [isChecked, setIsChecked] = useState(false);
 
+  const checkboxId = useId();
   const navigate = useNavigate();
 
   const levelVariant = 
@@ -26,6 +29,8 @@ export const QuestionPage = () => {
     card.level === 2 ? 'warn' : 
       card.level === 3 ? 'alert' : '';
   const statusCard = card.completed ? 'succes' : 'primary';
+
+  const onCheckboxChangeHandler = () => {};
 
   return (
     <div className={cls.card}>
@@ -56,6 +61,12 @@ export const QuestionPage = () => {
         }
       </ul>
 
+      <label htmlFor={checkboxId} className={cls.cardCheckbox}>
+        <input type="checkbox" className={cls.checkbox} id={checkboxId} checked={isChecked} onChange={onCheckboxChangeHandler} disabled={false}/>
+        <span>mark question as completed</span>
+      </label>
+
+      <Button onClick={() => navigate(`/editquestion/${card.id}`)}>Edit Question</Button>
       <Button onClick={() => navigate('/')}>Back</Button>
     </div>
   );

@@ -68,4 +68,22 @@
     }
 }
 
+.cardCheckbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    span {
+        font-size: 14px;
+        padding-bottom: 2px;
+    }
+}
+
+.checkbox {
+    width: 18px;
+    height: 18px;
+    accent-color: #16c47f;
+}
+
 
