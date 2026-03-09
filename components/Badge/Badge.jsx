@@ -5,8 +5,8 @@ export const Badge = ( {variant, children} ) => {
   switch (variant) {
   case 'primary':
     return <div className={`${cls.badge} ${cls.primary}`}> {children} </div>;
-  case 'succes':
-    return <div className={`${cls.badge} ${cls.succes}`}> {children} </div>;
+  case 'success':
+    return <div className={`${cls.badge} ${cls.success}`}> {children} </div>;
   case 'warn':
     return <div className={`${cls.badge} ${cls.warn}`}> {children} </div>;
   case 'alert':

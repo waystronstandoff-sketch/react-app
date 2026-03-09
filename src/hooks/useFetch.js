@@ -1,27 +1,27 @@
-import { delayFn } from "../helpers/delayFn";
-import { useState } from "react";
+import { delayFn } from '../helpers/delayFn';
+import { useState } from 'react';
 
 
 export const useFetch = (callback) => {
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
-    const fetchFn = async(arg) => {
-        try {
-            setIsLoading(true);
-            setError("");
-            await delayFn();
+  const fetchFn = async(arg) => {
+    try {
+      setIsLoading(true);
+      setError('');
+      await delayFn();
 
-            const response = await callback(arg);
+      const response = await callback(arg);
 
-            return response;
+      return response;
 
-        } catch (error) {
-            setError(error.message);
-        } finally {
-            setIsLoading(false);
-        }
-    };
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-    return [fetchFn, isLoading, error]
-}
+  return [fetchFn, isLoading, error];
+};

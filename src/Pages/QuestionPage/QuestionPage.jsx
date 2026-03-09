@@ -1,47 +1,67 @@
 import cls from './QuestionPage.module.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Badge } from '../../../components/Badge';
 import { Button } from '../../../components/Button';
-import { useId, useState } from 'react';
-
-const card = {  
-  id: '1',
-  question: 'Что такое React?',
-  answer: 'React — это библиотека для создания пользовательских интерфейсов.',
-  description: 'React — это JavaScript-библиотека, разработанная Facebook, которая используется для построения UI с компонентным подходом. React позволяет вам создавать пользовательские интерфейсы из отдельных частей, называемых компонентами.',
-  resources: [
-    'https://react.dev',
-    'https://react.dev/reference/react'
-  ],
-  level: 1,
-  completed: true,
-  editDate: '03.02.2025, 19:49'
-};
+import { useEffect, useId, useState } from 'react';
+import { useFetch } from '../../hooks/useFetch';
+import { Loader } from '../../../components/Loader';
+import { API_URL } from '../../constans';
 
 export const QuestionPage = () => {
-  const [isChecked, setIsChecked] = useState(false);
-
+  const { id } = useParams();
+  const [isChecked, setIsChecked] = useState(true);
+  const [card, setCard] = useState(null);
   const checkboxId = useId();
   const navigate = useNavigate();
 
-  const levelVariant = 
-  card.level === 1 ? 'primary' : 
-    card.level === 2 ? 'warn' : 
-      card.level === 3 ? 'alert' : '';
-  const statusCard = card.completed ? 'succes' : 'primary';
+  const [fetchCard, isCardLoading] = useFetch(async () => {
+    const response = await fetch(`${API_URL}/react/${id}`);
+    const data = await response.json();
+    setCard(data);
+  });
 
-  const onCheckboxChangeHandler = () => {};
+  const [updateCard, isCardUpdating] = useFetch(async (isChecked) => {
+    const response = await fetch(`${API_URL}/react/${id}`, {
+      method: 'PATCH',
+      body: JSON.stringify({ completed: isChecked })
+    });
+    const data = await response.json();
+    setCard(data);
+  });
+
+  useEffect(() => {
+    fetchCard();
+  }, []);
+
+  useEffect(() => {
+    card !== null && setIsChecked(card.completed);
+  }, [card]);
+
+  const onCheckboxChangeHandler = () => {
+    setIsChecked(!isChecked);
+    updateCard(!isChecked);
+  };
+
+  if (isCardLoading) {
+    return <Loader />;
+  }
+
+  if (!card) {
+    return <div>Карточка не найдена</div>;
+  }
+
+  const levelVariant = () => (card.level === 1 ? 'primary' : card.level === 2 ? 'warn' : card.level === 3 ? 'alert' : '');
+  const statusCard = () => (card.completed ? 'success' : 'primary');
 
   return (
     <div className={cls.card}>
       <div className={cls.cardLabels}>
-        <Badge variant={levelVariant}>Level: {card.level}</Badge>
-        <Badge variant={statusCard}>{card.completed ? 'Completed' : 'Not completed'}</Badge>
+        <Badge variant={levelVariant()}>Level: {card.level}</Badge>
+        <Badge variant={statusCard()}>{card.completed ? 'Completed' : 'Not completed'}</Badge>
         {card?.editDate && <p className={cls.editDate}>Edited: {card.editDate}</p>}
       </div>
 
       <h5 className={cls.cardTitle}>{card.question}</h5>
-
       <p className={cls.cardDescription}>{card.description}</p>
 
       <div className={cls.cardAnswers}>
@@ -49,25 +69,29 @@ export const QuestionPage = () => {
         <p className={cls.cardAnswer}>{card.answer}</p>
       </div>
 
-
       <ul className={cls.cardLinks}>
         Resources:
-        {
-          card.resources.map((link, index) => {
-            return (<li key={index}>
-              <a href={link.trim()} target="_blank" rel="noreferrer">{link.trim()}</a>
-            </li>);
-          })
-        }
+        {card.resources.map((link, index) => (
+          <li key={index}>
+            <a href={link.trim()} target="_blank" rel="noreferrer">{link.trim()}</a>
+          </li>
+        ))}
       </ul>
 
       <label htmlFor={checkboxId} className={cls.cardCheckbox}>
-        <input type="checkbox" className={cls.checkbox} id={checkboxId} checked={isChecked} onChange={onCheckboxChangeHandler} disabled={false}/>
+        <input
+          type="checkbox"
+          className={cls.checkbox}
+          id={checkboxId}
+          checked={isChecked}
+          onChange={onCheckboxChangeHandler}
+          disabled={isCardUpdating}
+        />
         <span>mark question as completed</span>
       </label>
 
-      <Button onClick={() => navigate(`/editquestion/${card.id}`)}>Edit Question</Button>
-      <Button onClick={() => navigate('/')}>Back</Button>
+      <Button onClick={() => navigate(`/editquestion/${card.id}`)} isDisabled={isCardUpdating}>Edit Question</Button>
+      <Button onClick={() => navigate('/')} isDisabled={isCardUpdating}>Back</Button>
     </div>
   );
 };
