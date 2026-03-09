@@ -9,7 +9,7 @@ import { API_URL } from '../../constans';
 
 export const QuestionPage = () => {
   const { id } = useParams();
-  const [isChecked, setIsChecked] = useState(true);
+  const [isChecked, setIsChecked] = useState(false);
   const [card, setCard] = useState(null);
   const checkboxId = useId();
   const navigate = useNavigate();
@@ -34,7 +34,9 @@ export const QuestionPage = () => {
   }, []);
 
   useEffect(() => {
-    card !== null && setIsChecked(card.completed);
+    if (card !== null) {
+      setIsChecked(card.completed);
+    }
   }, [card]);
 
   const onCheckboxChangeHandler = () => {

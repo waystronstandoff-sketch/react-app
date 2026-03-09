@@ -10,7 +10,7 @@ export const QuestionCard = ({ card }) => {
     card.level === 1 ? 'primary' : 
       card.level === 2 ? 'warn' : 
         card.level === 3 ? 'alert' : '';
-  const statusCard = card.completed ? 'succes' : 'primary';
+  const statusCard = card.completed ? 'success' : 'primary';
 
   return (
     <div className={cls.card}>

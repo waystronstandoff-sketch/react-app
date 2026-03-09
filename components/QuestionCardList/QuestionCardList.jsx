@@ -1,6 +1,6 @@
-import { QuestionCard } from "../QuestionCard/QuestionCard";
-import { memo } from "react";
-import cls from "./QuestionCardList.module.css";
+import { QuestionCard } from '../QuestionCard/QuestionCard';
+import { memo } from 'react';
+import cls from './QuestionCardList.module.css';
 
 export const QuestionCardList = memo(( {cards} ) => {
   return (

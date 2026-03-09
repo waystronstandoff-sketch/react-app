@@ -53,6 +53,7 @@ export default [
 
       // Стандартные отключения
       'react/jsx-no-target-blank': 'warn',
+      'react-hooks/set-state-in-effect': 'off',
       'react/display-name': 'off',
       'react-refresh/only-export-components': [
         'warn',
