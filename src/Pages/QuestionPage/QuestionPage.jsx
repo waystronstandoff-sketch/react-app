@@ -49,7 +49,7 @@ export const QuestionPage = () => {
   }
 
   if (!card) {
-    return <div>Карточка не найдена</div>;
+    return <div>Card Not Found</div>;
   }
 
   const levelVariant = () => (card.level === 1 ? 'primary' : card.level === 2 ? 'warn' : card.level === 3 ? 'alert' : '');
