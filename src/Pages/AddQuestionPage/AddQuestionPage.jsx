@@ -5,7 +5,7 @@ export const AddQuestionPage = () => {
 
   return (
     <div className={cls.addQuestionPageContainer}>
-      <h1 className={cls.formTitle}>Fill Question Form</h1>
+      <h1 className={cls.formTitle}>Edit question</h1>
 
       <div className={cls.formContainer}>
         <form action="" className={cls.form}>
@@ -27,7 +27,7 @@ export const AddQuestionPage = () => {
 
           <div className={cls.formControl}>
             <label htmlFor="resourcesField">Resources:</label>
-            <textarea name="resources" id="resourcesField" defaultValue={'defaultValue'} cols="30" rows="5" required placeholder="please enter a resources separated by commas"></textarea>
+            <textarea name="resources" id="resourcesField" defaultValue={'defaultValue'} cols="30" rows="3" required placeholder="please enter a resources separated by commas"></textarea>
           </div>
 
           <div className={cls.formControl}>
