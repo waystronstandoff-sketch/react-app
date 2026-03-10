@@ -4,7 +4,7 @@ import { Badge } from '../../../components/Badge';
 import { Button } from '../../../components/Button';
 import { useEffect, useId, useState } from 'react';
 import { useFetch } from '../../hooks/useFetch';
-import { Loader } from '../../../components/Loader';
+import { Loader, SmallLoader } from '../../../components/Loader';
 import { API_URL } from '../../constans';
 
 export const QuestionPage = () => {
@@ -90,6 +90,8 @@ export const QuestionPage = () => {
           disabled={isCardUpdating}
         />
         <span>mark question as completed</span>
+
+        {isCardUpdating && <SmallLoader />}
       </label>
 
       <Button onClick={() => navigate(`/editquestion/${card.id}`)} isDisabled={isCardUpdating}>Edit Question</Button>
