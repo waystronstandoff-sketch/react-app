@@ -4,6 +4,7 @@ import cls from './AddQuestionPage.module.css';
 import { delayFn } from '../../helpers/delayFn.js';
 import { toast } from 'react-toastify';
 import { API_URL } from '../../constans/index.js';
+import { Loader } from '../../../components/Loader';
 
 
 const createCardAction = async (_prevState, formData) => {
@@ -25,12 +26,18 @@ const createCardAction = async (_prevState, formData) => {
         completed: false
       })
     });
+
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+
     const question = await response.json();
     toast.success('New question is successfully created!');
 
     return isClearForm ? {} : question;
   } catch (error) {
     toast.error(error.message);
+    return {};
   }
 };
 
@@ -39,7 +46,9 @@ export const AddQuestionPage = () => {
   const [formState, formAction, isPending] = useActionState(createCardAction, { clearForm: true });
 
   return (
-    <div className={cls.addQuestionPageContainer}>
+    <>
+      {isPending && <Loader />}
+
       <h1 className={cls.formTitle}>Add new question</h1>
 
       <div className={cls.formContainer}>
@@ -121,6 +130,6 @@ export const AddQuestionPage = () => {
           <Button isDisabled={isPending}>Add question</Button>
         </form>
       </div>
-    </div>
+    </>
   );
 };
