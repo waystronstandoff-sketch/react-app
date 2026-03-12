@@ -29,6 +29,8 @@ export default [
       ...reactHooks.configs.recommended.rules,
 
       'no-undef': 'off',
+
+      'no-console': 'error',
   
       // Отключаем проверку используемых, но не объявленных переменных
       'no-unused-vars': 'off',
