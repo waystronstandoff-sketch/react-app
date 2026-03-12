@@ -41,7 +41,7 @@ const createCardAction = async (_prevState, formData) => {
   }
 };
 
-export const AddQuestionPage = () => {
+const AddQuestionPage = () => {
 
   const [formState, formAction, isPending] = useActionState(createCardAction, { clearForm: true });
 
@@ -100,7 +100,6 @@ export const AddQuestionPage = () => {
               defaultValue={formState.resources}
               cols="30"
               rows="3"
-              required
               placeholder="please enter a resources separated by commas"
             ></textarea>
           </div>
@@ -133,3 +132,5 @@ export const AddQuestionPage = () => {
     </>
   );
 };
+
+export default AddQuestionPage;
