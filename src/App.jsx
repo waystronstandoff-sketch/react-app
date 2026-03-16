@@ -5,21 +5,24 @@ import { NotFoundPage } from './Pages/NotFoundPage';
 import { QuestionPage } from './Pages/QuestionPage';
 import { AddQuestionPageLazy } from './Pages/AddQuestionPage';
 import { EditQuestionPage } from './Pages/EditQuestionPage';
+import { AuthProvider } from './AuthProvider/AuthProvider';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<MainLayout />}>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/forbidden" element={<div>forbidden</div>} />
-          <Route path="/addquestion" element={<AddQuestionPageLazy />} />
-          <Route path="/question/:id" element={<QuestionPage />} />
-          <Route path="/editquestion/:id" element={<EditQuestionPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <AuthProvider> 
+      <BrowserRouter>
+        <Routes>
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/forbidden" element={<div>forbidden</div>} />
+            <Route path="/addquestion" element={<AddQuestionPageLazy />} />
+            <Route path="/question/:id" element={<QuestionPage />} />
+            <Route path="/editquestion/:id" element={<EditQuestionPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 
