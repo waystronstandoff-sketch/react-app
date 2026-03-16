@@ -10,4 +10,27 @@
     border-radius: 10px;
     background-color: var(--card-bg-color);
     box-shadow: 0 0 8px 5px rgba(0, 0, 0, .1);
+
+    position: relative;
+}
+
+.removeBtn {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    background-color: #d84040;
+    border: none;
+    cursor: pointer;
+    padding-top: 1px;
+}
+
+.removeBtn:disabled {
+    opacity: .3;
 }
