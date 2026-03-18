@@ -1,11 +1,20 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Outlet, Navigate, useLocation } from 'react-router-dom';
 import { MainLayout } from '../components/MainLayout';
 import { HomePage } from './Pages/HomePage';
 import { NotFoundPage } from './Pages/NotFoundPage';
 import { QuestionPage } from './Pages/QuestionPage';
 import { AddQuestionPageLazy } from './Pages/AddQuestionPage';
-import { EditQuestionPage } from './Pages/EditQuestionPage';
+import { EditQuestionPage, EditQuestionPageLazy } from './Pages/EditQuestionPage';
 import { AuthProvider } from './AuthProvider/AuthProvider';
+import { useAuth } from './hooks/useAuth';
+import { ForbiddenPage } from './Pages/ForbiddenPage/ForbiddenPage';
+
+const ProtectedRoutes = () => {
+  const { isAuth } = useAuth();
+  const location = useLocation();
+  
+  return isAuth ? <Outlet /> : <Navigate to="/forbidden" replace state={ {from: location.pathname} }/>;
+};
 
 function App() {
   return (
@@ -14,10 +23,14 @@ function App() {
         <Routes>
           <Route element={<MainLayout />}>
             <Route path="/" element={<HomePage />} />
-            <Route path="/forbidden" element={<div>forbidden</div>} />
-            <Route path="/addquestion" element={<AddQuestionPageLazy />} />
+            <Route path="/forbidden" element={<ForbiddenPage />} />
             <Route path="/question/:id" element={<QuestionPage />} />
-            <Route path="/editquestion/:id" element={<EditQuestionPage />} />
+
+            <Route element={<ProtectedRoutes />}>
+              <Route path="/addquestion" element={<AddQuestionPageLazy />} />            
+              <Route path="/editquestion/:id" element={<EditQuestionPageLazy />} />
+            </Route>
+
             <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>

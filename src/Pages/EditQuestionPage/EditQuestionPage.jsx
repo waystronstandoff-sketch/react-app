@@ -6,7 +6,7 @@ import cls from './EditQuestionPage.module.css';
 import { useEffect, useState } from 'react';
 import { EditQuestion } from './EditQuestion.jsx';
 
-export const EditQuestionPage = () => {
+const EditQuestionPage = () => {
   const { id } = useParams();
   const [question, setQuestion] = useState(null);
 
@@ -29,3 +29,5 @@ export const EditQuestionPage = () => {
     </>
   );
 };
+
+export default EditQuestionPage;

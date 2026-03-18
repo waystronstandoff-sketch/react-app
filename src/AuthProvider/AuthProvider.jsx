@@ -1,6 +1,7 @@
 import { createContext, useState } from 'react';
 import { AUTH_STORAGE } from '../constans';
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const AuthContext = createContext(null);
 
 export const AuthProvider = ( { children } ) => {
