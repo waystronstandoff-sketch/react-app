@@ -4,7 +4,7 @@ import { HomePage } from './Pages/HomePage';
 import { NotFoundPage } from './Pages/NotFoundPage';
 import { QuestionPage } from './Pages/QuestionPage';
 import { AddQuestionPageLazy } from './Pages/AddQuestionPage';
-import { EditQuestionPage, EditQuestionPageLazy } from './Pages/EditQuestionPage';
+import { EditQuestionPageLazy } from './Pages/EditQuestionPage';
 import { AuthProvider } from './AuthProvider/AuthProvider';
 import { useAuth } from './hooks/useAuth';
 import { ForbiddenPage } from './Pages/ForbiddenPage/ForbiddenPage';

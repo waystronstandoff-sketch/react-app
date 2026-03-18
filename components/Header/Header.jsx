@@ -4,6 +4,7 @@ import ReactLogo from '../../src/assets/react.svg';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../src/hooks/useAuth';
 import { AUTH_STORAGE } from '../../src/constans';
+import { ThemeToggler } from '../../src/features/ThemeToggler';
 
 export const Header = () => {
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ export const Header = () => {
       </p>
 
       <div className={cls.headerButton}>
+        <ThemeToggler />
         {isAuth && <Button onClick={() => navigate('/addquestion')}> Add </Button>}
         <Button onClick={loginHandler} isActive={!isAuth}>{isAuth ? 'Logout' : 'Login'}</Button>
       </div>
