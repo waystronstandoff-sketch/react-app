@@ -11,9 +11,8 @@ export const ThemeToggler = () => {
     const updateTheme = isChecked ? 'dark' : 'light';
     setTheme(updateTheme);
 
-    localStorage.setItem(THEME_STORAGE, updateTheme);
-
     isChecked ? document.body.classList.add('darkLayout') : document.body.classList.remove('darkLayout');
+    localStorage.setItem(THEME_STORAGE, updateTheme);
   };
 
   return (

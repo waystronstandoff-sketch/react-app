@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from 'react';
 import { THEME_STORAGE } from '../constans';
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const ThemeContext = createContext(null);
 
 export const ThemeProvider = ( { children } ) => {
@@ -24,7 +25,7 @@ export const ThemeProvider = ( { children } ) => {
     detectTheme();
 
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    mediaQuery.addEventListener('change', detectTheme);
+    mediaQuery.addEventListener('change', detectTheme); 
 
     return () => {
       mediaQuery.removeEventListener('change', detectTheme);
