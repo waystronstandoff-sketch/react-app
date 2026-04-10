@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState, type FC, type ReactNode} from 'react';
-import { THEME_STORAGE } from '../constans';
+import { THEME_STORAGE } from '../constans/global.constans';
 import { type IThemeContext, THEME_ENUM } from '../types/types.global';
 
 export const ThemeContext = createContext<IThemeContext>({

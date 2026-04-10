@@ -1,5 +1,5 @@
 import { createContext, useState, type FC, type ReactNode} from 'react';
-import { AUTH_STORAGE } from '../constans';
+import { AUTH_STORAGE } from '../constans/global.constans';
 import type { IAuthContext } from '../types/types.global';
 
 export interface IAuthProps {

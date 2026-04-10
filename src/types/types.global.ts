@@ -1,4 +1,4 @@
-import type { Dispatch, SetStateAction } from "react";
+import type { Dispatch, SetStateAction } from 'react';
 
 export interface IAuthContext {
   isAuth: boolean;
@@ -11,6 +11,17 @@ export interface IThemeContext {
 }
 
 export enum THEME_ENUM {
-    LIGHT = "light",
-    DARK = "dark"
+  LIGHT = 'light',
+  DARK = 'dark',
+}
+
+export interface IQuestionCard {
+  id: string;
+  question: string;
+  answer: string;
+  description: string;
+  resources: string[];
+  level: number;
+  completed: boolean;
+  editDate?: Date;
 }

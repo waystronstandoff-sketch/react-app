@@ -1,5 +1,5 @@
 import type { ChangeEvent } from 'react';
-import { THEME_STORAGE } from '../../constans';
+import { THEME_STORAGE } from '../../constans/global.constans';
 import { useTheme } from '../../hooks/useTheme';
 import { THEME_ENUM } from '../../types/types.global';
 import cls from './ThemeToggler.module.css';

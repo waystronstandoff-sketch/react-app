@@ -3,7 +3,7 @@ import cls from './Header.module.css';
 import ReactLogo from '../../src/assets/react.svg';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../src/hooks/useAuth';
-import { AUTH_STORAGE } from '../../src/constans';
+import { AUTH_STORAGE } from '../../src/constans/global.constans';
 import { ThemeToggler } from '../../src/features/ThemeToggler';
 
 export const Header = () => {

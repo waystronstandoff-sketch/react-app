@@ -5,7 +5,7 @@ import { Button } from '../../../components/Button';
 import { useEffect, useId, useState } from 'react';
 import { useFetch } from '../../hooks/useFetch';
 import { Loader, SmallLoader } from '../../../components/Loader';
-import { API_URL } from '../../constans';
+import { API_URL } from '../../constans/global.constans';
 import { useAuth } from '../../hooks/useAuth';
 
 export const QuestionPage = () => {
