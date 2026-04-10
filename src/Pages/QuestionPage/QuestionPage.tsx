@@ -1,8 +1,8 @@
 import cls from './QuestionPage.module.css';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Badge } from '../../../components/Badge';
 import { Button } from '../../../components/Button';
 import { useEffect, useId, useState } from 'react';
+import { Badge } from '../../../components/Badge'
 import { useFetch } from '../../hooks/useFetch';
 import { Loader, SmallLoader } from '../../../components/Loader';
 import { API_URL } from '../../constans/global.constans';

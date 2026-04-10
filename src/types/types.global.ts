@@ -25,3 +25,10 @@ export interface IQuestionCard {
   completed: boolean;
   editDate?: Date;
 }
+
+export enum BADGE_ENUM {
+  PRIMARY = "primary",
+  SUCCESS = "success",
+  WARN = "warn",
+  ALERT = "alert",
+}
