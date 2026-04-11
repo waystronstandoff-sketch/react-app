@@ -4,7 +4,7 @@ import { BADGE_ENUM } from '../../src/types/types.global'
 
 export interface IBadgeProps {
   children: ReactNode;
-  variant: BADGE_ENUM
+  variant: BADGE_ENUM;
 }
 
 export const Badge: FC<IBadgeProps> = ( {variant, children} ) => {

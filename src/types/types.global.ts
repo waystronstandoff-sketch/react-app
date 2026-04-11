@@ -26,6 +26,10 @@ export interface IQuestionCard {
   editDate?: Date;
 }
 
+export interface IQuestionForm extends IQuestionCard {
+  clearForm: boolean;
+}
+
 export enum BADGE_ENUM {
   PRIMARY = "primary",
   SUCCESS = "success",

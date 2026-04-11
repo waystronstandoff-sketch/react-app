@@ -1,7 +1,16 @@
 import cls from './QuestionForm.module.css';
 import { Button } from '../../../components/Button';
+import type { FC } from 'react';
+import type { IQuestionForm } from '../../types/types.global';
 
-export const QuestionForm = ({ formAction, isPending, formState, submitBtnText }) => {
+export interface IQuestionFormProps {
+  formAction: any;
+  isPending: boolean;
+  formState: IQuestionForm;
+  submitBtnText: string;
+}
+
+export const QuestionForm: FC<IQuestionFormProps> = ({ formAction, isPending, formState, submitBtnText }) => {
 
   return (
     <form action={formAction} className={cls.form}>
@@ -13,8 +22,8 @@ export const QuestionForm = ({ formAction, isPending, formState, submitBtnText }
           name="question"
           id="questionField"
           defaultValue={formState.question}
-          cols="30"
-          rows="2"
+          cols={30}
+          rows={2}
           required
           placeholder="please enter a question"
         ></textarea>
@@ -26,8 +35,8 @@ export const QuestionForm = ({ formAction, isPending, formState, submitBtnText }
           name="answer"
           id="answerField"
           defaultValue={formState.answer}
-          cols="30"
-          rows="2"
+          cols={30}
+          rows={2}
           required
           placeholder="please enter a short answer"
         ></textarea>
@@ -39,8 +48,8 @@ export const QuestionForm = ({ formAction, isPending, formState, submitBtnText }
           name="description"
           id="descriptionField"
           defaultValue={formState.description}
-          cols="30"
-          rows="5"
+          cols={30}
+          rows={5}
           required
           placeholder="please enter a full description"
         ></textarea>
@@ -52,8 +61,8 @@ export const QuestionForm = ({ formAction, isPending, formState, submitBtnText }
           name="resources"
           id="resourcesField"
           defaultValue={formState.resources}
-          cols="30"
-          rows="3"
+          cols={30}
+          rows={3}
           placeholder="please enter a resources separated by commas"
         ></textarea>
       </div>

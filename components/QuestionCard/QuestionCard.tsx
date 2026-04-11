@@ -2,15 +2,20 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '../Button';
 import cls from './QuestionCard.module.css';
 import { Badge } from '../Badge';
+import { BADGE_ENUM, type IQuestionCard } from '../../src/types/types.global';
+import type { FC } from 'react';
 
-export const QuestionCard = ({ card }) => {
+export interface IQuestionCardProps {
+  card: IQuestionCard;
+}
+
+export const QuestionCard: FC<IQuestionCardProps> = ({ card }) => {
   const navigate = useNavigate();
 
   const levelVariant = 
-    card.level === 1 ? 'primary' : 
-      card.level === 2 ? 'warn' : 
-        card.level === 3 ? 'alert' : '';
-  const statusCard = card.completed ? 'success' : 'primary';
+    card.level === 1 ? BADGE_ENUM.PRIMARY : card.level === 2 ? BADGE_ENUM.WARN : BADGE_ENUM.ALERT;
+    
+  const statusCard = card.completed ? BADGE_ENUM.SUCCESS : BADGE_ENUM.PRIMARY;
 
   return (
     <div className={cls.card}>
