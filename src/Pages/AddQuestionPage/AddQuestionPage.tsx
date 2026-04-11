@@ -3,16 +3,17 @@ import cls from './AddQuestionPage.module.css';
 import { delayFn } from '../../helpers/delayFn.js';
 import { toast } from 'react-toastify';
 import { API_URL } from '../../constans/global.constans.js';
-import { Loader } from '../../../components/Loader';
-import { QuestionForm } from '../QuestionForm';
+import { Loader } from '../../../components/Loader/index.js';
+import { QuestionForm } from '../QuestionForm/index.js';
+import { type IQuestionForm } from '../../types/types.global.js';
 
 
-const createCardAction = async (_prevState, formData) => {
+const createCardAction = async (_prevState: Partial<IQuestionForm>, formData: FormData) => {
   try {
     await delayFn();
 
     const newQuestion = Object.fromEntries(formData);
-    const newResources = newQuestion.resources.trim();
+    const newResources = (newQuestion.resources as string).trim();
     const isClearForm = newQuestion.clearForm;
 
     const response = await fetch(`${API_URL}/react`, {
@@ -36,15 +37,15 @@ const createCardAction = async (_prevState, formData) => {
     toast.success('New question is successfully created!');
 
     return isClearForm ? {} : question;
-  } catch (error) {
-    toast.error(error.message);
+  } catch (error: any) {
+    toast.error(error?.message);
     return {};
   }
 };
 
 const AddQuestionPage = () => {
 
-  const [formState, formAction, isPending] = useActionState(createCardAction, { clearForm: true });
+  const [formState, formAction, isPending] = useActionState<Partial<IQuestionForm>, FormData>(createCardAction, { clearForm: true });
   return (
     <>
       {isPending && <Loader />}

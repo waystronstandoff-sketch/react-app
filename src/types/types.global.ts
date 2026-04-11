@@ -23,7 +23,7 @@ export interface IQuestionCard {
   resources: string[];
   level: number;
   completed: boolean;
-  editDate?: Date;
+  editDate?: string;
 }
 
 export interface IQuestionForm extends IQuestionCard {
@@ -35,4 +35,14 @@ export enum BADGE_ENUM {
   SUCCESS = "success",
   WARN = "warn",
   ALERT = "alert",
+}
+
+export interface IQuestionCardEdit {
+  data: IQuestionCard[];
+  first: number | null;
+  prev: number | null;
+  next: number | null;
+  last: number | null;
+  pages: number | null;
+  items: number | null;
 }

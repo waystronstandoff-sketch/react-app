@@ -7,11 +7,12 @@ import { useFetch } from '../../hooks/useFetch';
 import { Loader, SmallLoader } from '../../../components/Loader';
 import { API_URL } from '../../constans/global.constans';
 import { useAuth } from '../../hooks/useAuth';
+import { BADGE_ENUM, type IQuestionCard } from '../../types/types.global';
 
 export const QuestionPage = () => {
   const { id } = useParams();
   const [isChecked, setIsChecked] = useState(false);
-  const [card, setCard] = useState(null);
+  const [card, setCard] = useState<IQuestionCard | null>(null);
   const { isAuth } = useAuth();
 
   const checkboxId = useId();
@@ -57,8 +58,8 @@ export const QuestionPage = () => {
     return <div>Card Not Found</div>;
   }
 
-  const levelVariant = () => (card.level === 1 ? 'primary' : card.level === 2 ? 'warn' : card.level === 3 ? 'alert' : '');
-  const statusCard = () => (card.completed ? 'success' : 'primary');
+  const levelVariant = () => (card.level === 1 ? BADGE_ENUM.PRIMARY: card.level === 2 ? BADGE_ENUM.WARN : BADGE_ENUM.ALERT);
+  const statusCard = () => (card.completed ? BADGE_ENUM.SUCCESS : BADGE_ENUM.PRIMARY);
 
   return (
     <div className={cls.card}>

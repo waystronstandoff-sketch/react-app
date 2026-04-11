@@ -6,7 +6,7 @@ import type { IQuestionForm } from '../../types/types.global';
 export interface IQuestionFormProps {
   formAction: any;
   isPending: boolean;
-  formState: IQuestionForm;
+  formState: Partial<IQuestionForm>;
   submitBtnText: string;
 }
 

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, useRef } from 'react';
+import { useEffect, useMemo, useState, useRef, type ChangeEvent, type MouseEvent } from 'react';
 import { API_URL } from '../../constans/global.constans';
 import cls from './HomePage.module.css';
 import { QuestionCardList } from '../../../components/QuestionCardList';
@@ -6,19 +6,20 @@ import { Loader } from '../../../components/Loader';
 import { useFetch } from '../../hooks/useFetch';
 import { SearchInput } from '../../../components/SearchInput/SearchInput';
 import { Button } from '../../../components/Button';
+import type { IQuestionCardEdit } from '../../types/types.global';
 
 const DEFAULT_PER_PAGE = 10;
 
 export const HomePage = () => {
-  const [searchParams, setSearchParams] = useState(`_page=1&_per_page=${DEFAULT_PER_PAGE}`);
-  const [questions, setQuestions] = useState({});
-  const [searchValue, setSearchValue] = useState('');
-  const [sortSelect, setSortSelect] = useState('');
-  const [countSelect, setCountSelect] = useState('');
+  const [searchParams, setSearchParams] = useState<string>(`_page=1&_per_page=${DEFAULT_PER_PAGE}`);
+  const [questions, setQuestions] = useState<IQuestionCardEdit | null>(null);
+  const [searchValue, setSearchValue] = useState<string>('');
+  const [sortSelect, setSortSelect] = useState<string>('');
+  const [countSelect, setCountSelect] = useState<string>('');
 
-  const controlsContainerRef = useRef();
+  const controlsContainerRef = useRef<HTMLDivElement>(null);
 
-  const getActivePageNumber = () => (questions.next === null ? questions.last : questions.next - 1);
+  const getActivePageNumber = () => (questions!.next === null ? questions!.last : questions!.next - 1);
 
   const [getQuestions, isLoading, error] = useFetch(async (url) => {
     const response = await fetch(`${API_URL}/${url}`);
@@ -48,23 +49,23 @@ export const HomePage = () => {
     getQuestions(`react?${searchParams}`);
   }, [searchParams]);
 
-  const onSearchValueHandler = (e) => {
+  const onSearchValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
   };
 
-  const onSortSelectChangeHandler = (e) => {
+  const onSortSelectChangeHandler = (e: ChangeEvent<HTMLSelectElement>) => {
     setSortSelect(e.target.value);
     setSearchParams(`_page=1&_per_page=${countSelect}&${e.target.value}`);
   };
 
-  const paginationHandler = (e) => {
-    if (e.target.tagName === 'BUTTON') {
-      setSearchParams(`_page=${e.target.textContent}&_per_page=${countSelect}&${sortSelect}`);
-      controlsContainerRef.current.scrollIntoView({ behavior: 'smooth' });
+  const paginationHandler = (e: MouseEvent<HTMLDivElement>) => {
+    if ((e.target as HTMLElement).tagName === 'BUTTON') {
+      setSearchParams(`_page=${(e.target as HTMLElement).textContent}&_per_page=${countSelect}&${sortSelect}`);
+      controlsContainerRef.current?.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
-  const onChangeCountSelectHandler = (e) => {
+  const onChangeCountSelectHandler = (e: ChangeEvent<HTMLSelectElement>) => {
     setCountSelect(e.target.value);
     setSearchParams(`_page=1&_per_page=${e.target.value}&${sortSelect}`);
   };

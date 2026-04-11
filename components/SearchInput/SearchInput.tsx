@@ -4,7 +4,7 @@ import { SearchIcon } from '../icons';
 
 export interface ISearchInputProps {
   value: string;
-  onChange: (e: ChangeEvent) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const SearchInput: FC<ISearchInputProps> = ( { value, onChange } ) => {
